@@ -1,0 +1,8 @@
+Hi! We're Gonzalo, Cielo and Florencia
+
+First thing we did was copy the ssh private key to a local file.
+Then, we ran on our terminal "ssh -i <private key path> it_consultat@13.40.34.30" and we accessed the server
+
+With the command "scp -i <private key path> it_consultant@13.40.34.30:<server's path> <local's path> we copied "dump_2022_11_19.pcap" to our computer. 
+
+We examined the file with Wireshark
