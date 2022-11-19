@@ -11,10 +11,12 @@ We examined the file with Wireshark.
 
 ¡Flags founded!
 
-> 1: At website > internal > index.html we found the key nujnlhrZZKidXugUkCtiUgqDMuoDbnA3. Where we found the key, the code was calling the file "login.php". At "login.php" we realized that with a certain username and a certain password, we can request all the usernames and passwords.
+> 1: At website > internal > index.html we found the key nujnlhrZZKidXugUkCtiUgqDMuoDbnA3. Where we found the key, the code was calling the file "login.php". At "login.php" we realized that with a certain username, we can request all the usernames and passwords.
 Username: 1') OR ('1' = '1
-Password: 1') OR ('1' = '1
 
+> 2: At websites > php > login.html we found the key qL1cmCvxPS626V9MBVCL3x18LKZc4oc8. We investigated about MD5, and we found that two different passwords could have the same hash. That could be an exploit :(
 
-> 2: At website > contact > index.html we found the key 5Mk3rXNhMC8Osgpki3iOcdVTkSAIMdxE. Where we found the key, the code was calling the file "test_comment.php". Examining the file "test_comment.php" we found a code in 64 bit format. We decrypted it and found the flag.
+> 3: At website > contact > index.html we found the key 5Mk3rXNhMC8Osgpki3iOcdVTkSAIMdxE. Where we found the key, the code was calling the file "test_comment.php". Examining the file "test_comment.php" we found a code in 64 bit format.
+
+> 4: At pseudo-terminal > switch.py we found the key IUt0zFZKcPsLo2yek7OgSpockEd80LOA. Later on the same file, we found the flag corresponding to this key. When terminal.py calls "get_command("banner")", the get_command function calls the function "cmd_" + "banner".
 
