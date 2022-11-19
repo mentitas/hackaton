@@ -5,4 +5,16 @@ Then, we ran on our terminal "ssh -i <private key path> it_consultat@13.40.34.30
 
 With the command "scp -i <private key path> it_consultant@13.40.34.30:<server's path> <local's path> we copied "dump_2022_11_19.pcap" to our computer. 
 
-We examined the file with Wireshark
+We examined the file with Wireshark.
+
+
+
+¡Flags founded!
+
+> 1: At website > internal > index.html we found the key nujnlhrZZKidXugUkCtiUgqDMuoDbnA3. Where we found the key, the code was calling the file "login.php". At "login.php" we realized that with a certain username and a certain password, we can request all the usernames and passwords.
+Username: 1') OR ('1' = '1
+Password: 1') OR ('1' = '1
+
+
+> 2: At website > contact > index.html we found the key 5Mk3rXNhMC8Osgpki3iOcdVTkSAIMdxE. Where we found the key, the code was calling the file "test_comment.php". Examining the file "test_comment.php" we found a code in 64 bit format. We decrypted it and found the flag.
+
